@@ -4,7 +4,7 @@
     using System.Net;
 
     [Route("api/[controller]")]
-    [GenericControllerNameConvention]
+    [GenericControllerConvention]
     public class GenericController<T, TIdentitifier> : Controller where T : IBaseEntity<TIdentitifier>
     {
         [HttpGet]

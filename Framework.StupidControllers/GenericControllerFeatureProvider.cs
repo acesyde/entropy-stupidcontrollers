@@ -17,19 +17,29 @@
 
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            // This is designed to run after the default ControllerTypeProvider, so the list of 'real' controllers
-            // has already been populated.
             foreach (var entityType in _provider.GetEntities())
             {
-                var attributeController = entityType.GetCustomAttribute<ControllerNameAttribute>();
+                var entityConventionAttribute = entityType.GetCustomAttribute<EntityConventionAttribute>();
 
-                var typeName = attributeController.Name + "Controller";
+                if (entityConventionAttribute == null)
+                    continue;
+
+                var typeName = entityConventionAttribute.ControllerName + "Controller";
                 if (!feature.Controllers.Any(t => t.Name == typeName))
                 {
                     var genericType = entityType.ImplementedInterfaces.First().GenericTypeArguments[0];
-                    // There's no 'real' controller for this entity, so add the generic version.
                     var controllerType = typeof(GenericController<,>).MakeGenericType(entityType.AsType(), genericType).GetTypeInfo();
                     feature.Controllers.Add(controllerType);
+                }
+
+                var properties = entityType.GetProperties();
+                foreach (var property in properties)
+                {
+                    var propertyEntityAttribute = property.GetCustomAttribute<EntityConventionAttribute>();
+                    if(propertyEntityAttribute != null)
+                    {
+
+                    }
                 }
             }
         }

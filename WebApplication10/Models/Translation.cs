@@ -6,7 +6,7 @@ namespace WebApplication10.Models
     {
         [Key]
         [Required]
-        public string Culture { get; set; }
+        public string Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
