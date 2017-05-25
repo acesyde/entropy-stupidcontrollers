@@ -1,5 +1,6 @@
 ﻿namespace Framework.StupidControllers
 {
+    using Framework.StupidControllers.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Net;
 
@@ -10,8 +11,12 @@
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public IActionResult Get()
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult Search([FromQuery(Name = "")]SearchQuery query)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             return Ok($"Hello from {GetType().FullName}.");
         }
 

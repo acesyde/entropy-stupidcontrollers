@@ -1,8 +1,7 @@
-﻿using Framework.StupidControllers;
-using System.Collections.Generic;
-
-namespace Framework.StupidControllers
+﻿namespace Framework.StupidControllers.Models
 {
+    using System.Collections.Generic;
+
     public class Paginated<T, TIdentifier> where T : IBaseEntity<TIdentifier>
     {
         public int Limit { get; set; }

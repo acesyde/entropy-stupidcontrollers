@@ -2,6 +2,7 @@
 {
     using Framework.StupidControllers;
     using Framework.StupidControllers.Attributes;
+    using Framework.StupidControllers.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

@@ -1,4 +1,4 @@
-﻿namespace Framework.StupidControllers
+﻿namespace Framework.StupidControllers.Models
 {
     public interface IBaseEntity<T>
     {

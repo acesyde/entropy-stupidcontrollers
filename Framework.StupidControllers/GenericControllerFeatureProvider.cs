@@ -30,17 +30,7 @@
                     var genericType = entityType.ImplementedInterfaces.First().GenericTypeArguments[0];
                     var controllerType = typeof(GenericController<,>).MakeGenericType(entityType.AsType(), genericType).GetTypeInfo();
                     feature.Controllers.Add(controllerType);
-                }
-
-                var properties = entityType.GetProperties();
-                foreach (var property in properties)
-                {
-                    var propertyEntityAttribute = property.GetCustomAttribute<EntityConventionAttribute>();
-                    if(propertyEntityAttribute != null)
-                    {
-
-                    }
-                }
+                }                
             }
         }
     }
