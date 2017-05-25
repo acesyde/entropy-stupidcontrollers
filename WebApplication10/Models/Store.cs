@@ -4,6 +4,7 @@ namespace WebApplication10.Models
 {
     public class Store
     {
+        [Key]
         [Required]
         public string Name { get; set; }
         public string Uri { get; set; }

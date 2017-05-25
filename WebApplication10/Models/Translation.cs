@@ -4,6 +4,7 @@ namespace WebApplication10.Models
 {
     public class Translation
     {
+        [Key]
         [Required]
         public string Culture { get; set; }
         [Required]

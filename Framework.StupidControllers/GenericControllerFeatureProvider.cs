@@ -1,5 +1,6 @@
 ﻿namespace Framework.StupidControllers
 {
+    using Framework.StupidControllers.Attributes;
     using Microsoft.AspNetCore.Mvc.ApplicationParts;
     using Microsoft.AspNetCore.Mvc.Controllers;
     using System.Collections.Generic;
@@ -20,13 +21,14 @@
             // has already been populated.
             foreach (var entityType in _provider.GetEntities())
             {
-                var typeName = entityType.Name + "sController";
+                var attributeController = entityType.GetCustomAttribute<ControllerNameAttribute>();
+
+                var typeName = attributeController.Name + "Controller";
                 if (!feature.Controllers.Any(t => t.Name == typeName))
                 {
                     var genericType = entityType.ImplementedInterfaces.First().GenericTypeArguments[0];
                     // There's no 'real' controller for this entity, so add the generic version.
                     var controllerType = typeof(GenericController<,>).MakeGenericType(entityType.AsType(), genericType).GetTypeInfo();
-                    ProxifiedEntity.GenerateProxy()
                     feature.Controllers.Add(controllerType);
                 }
             }
